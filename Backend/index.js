@@ -4,10 +4,10 @@ const cors = require('cors');
 
 const app = express();
 
-app.listen(80);
+app.listen(8080);
 app.use(cors()); // เรียกใช้ผ่านโดเมนอื่นได้
 app.use(bodyParser.json()); // สำหรับอ่านข้อมูลจาก Axios
-app.use(bodyParser.urlencoded({ extended: true })); // ให้ผู้ใช้ป้อนข้อมูลเข้ามาได้
+app.use(bodyParser.urlencoded({extended: true})); // ให้ผู้ใช้ป้อนข้อมูลเข้ามาได้
 
 // CRUD
 // Create
@@ -20,6 +20,7 @@ var Countries = [],
 
 app.get('/api/countries', (req, res) => { // ดึงค่าประเทศทุกประเทศ
   res.send(Countries);
+  console.log('Get Countries');
 });
 
 app.post('/api/countries', (req, res) => { // เพิ่มประเทศใหม่
@@ -30,11 +31,12 @@ app.post('/api/countries', (req, res) => { // เพิ่มประเทศ�
     name: name
   });
   res.send(Countries);
+  console.log('New Country', name);
 });
 
 app.put('/api/countries/:country_id', (req, res) => { // อัพเดทประเทศจากไอดี
   var id = req.params.country_id,
-     name = req.body.name;
+    name = req.body.name;
 
   Countries.map(Country => {
     if (Country.id == id) {
@@ -42,6 +44,7 @@ app.put('/api/countries/:country_id', (req, res) => { // อัพเดทป�
     }
   });
   res.send(Countries);
+  console.log('Update Country', name);
 });
 
 app.delete('/api/countries/:country_id', (req, res) => { // ลบประเทศจากไอดี
@@ -55,4 +58,5 @@ app.delete('/api/countries/:country_id', (req, res) => { // ลบประเ�
   });
   Countries = tmp;
   res.send(Countries);
+  console.log('Delete Country', id);
 });

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API_URL = 'http://localhost:80/api/countries';
+const API_URL = 'http://localhost:8080/api/countries';
 
 // READ
 export function getCountries() {
